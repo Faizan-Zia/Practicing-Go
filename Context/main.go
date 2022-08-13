@@ -33,6 +33,28 @@ func assignTask(ctx context.Context) {
 	fmt.Println("Finished task assignment")
 }
 
+func assignTaskWithDeadline(ctx context.Context) {
+	deadline := time.Now().Add(1500 * time.Millisecond)
+	ctx, cancelCtx := context.WithDeadline(ctx, deadline)
+	churnNumbers := make(chan int)
+	go performTask(ctx, churnNumbers) 
+
+	for i := 0; i <= 3; i++ {
+		select {
+		case churnNumbers <- i:
+			time.Sleep(1000 * time.Millisecond)
+		case <- ctx.Done():
+			break
+		}
+	}
+
+	cancelCtx()
+
+	time.Sleep(1000 * time.Millisecond)
+
+	fmt.Println("Finished task assignment (Wirh Deadline)")
+}
+
 func performTask(ctx context.Context, ch chan int) {
 	for {
 		select {
@@ -58,5 +80,10 @@ func main() {
 	doSomething(ctx)
 
 	// Testing the cancel context functionality
+	fmt.Println("\n Cancel context")
 	assignTask(ctx)
+
+	// Testing the cancel context with deadline functionality
+	fmt.Println("\nDeadline based context")
+	assignTaskWithDeadline(ctx)
 }
