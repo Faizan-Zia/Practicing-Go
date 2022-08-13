@@ -1,2 +1,2 @@
 # Practicing-Go
-Learning Golang by building mini projects
+Building mini projects and hoping to contribute to Kubernetes one day
