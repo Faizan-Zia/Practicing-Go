@@ -11,7 +11,6 @@
  * * Database settings
  * * Secret keys
  * * Database table prefix
- * * Localized language
  * * ABSPATH
  *
  * @link https://wordpress.org/support/article/editing-wp-config-php/
@@ -21,16 +20,16 @@
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'local' );
+define( 'DB_NAME', 'wordpress' );
 
 /** Database username */
-define( 'DB_USER', 'root' );
+define( 'DB_USER', 'user' );
 
 /** Database password */
-define( 'DB_PASSWORD', 'root' );
+define( 'DB_PASSWORD', 'user' );
 
 /** Database hostname */
-define( 'DB_HOST', 'localhost' );
+define( 'DB_HOST', '127.0.0.1' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
@@ -49,7 +48,14 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
-
+define( 'AUTH_KEY',         'put your unique phrase here' );
+define( 'SECURE_AUTH_KEY',  'put your unique phrase here' );
+define( 'LOGGED_IN_KEY',    'put your unique phrase here' );
+define( 'NONCE_KEY',        'put your unique phrase here' );
+define( 'AUTH_SALT',        'put your unique phrase here' );
+define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );
+define( 'LOGGED_IN_SALT',   'put your unique phrase here' );
+define( 'NONCE_SALT',       'put your unique phrase here' );
 
 /**#@-*/
 
@@ -60,11 +66,6 @@ define( 'DB_COLLATE', '' );
  * a unique prefix. Only numbers, letters, and underscores please!
  */
 $table_prefix = 'wp_';
-
-
-/* Add any custom values between this line and the "stop editing" line. */
-
-
 
 /**
  * For developers: WordPress debugging mode.
@@ -78,15 +79,20 @@ $table_prefix = 'wp_';
  *
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
-if ( ! defined( 'WP_DEBUG' ) ) {
-	define( 'WP_DEBUG', false );
-}
+define( 'WP_DEBUG', false );
+
+/* Add any custom values between this line and the "stop editing" line. */
+
+$_SERVER['HTTPS']='on';
+
+define( 'WP_HOME', 'https://ed-6522229104836608.educative.run/wordpress' );
+define( 'WP_SITEURL', 'https://ed-6522229104836608.educative.run/wordpress' );
 
 /* That's all, stop editing! Happy publishing. */
 
 /** Absolute path to the WordPress directory. */
 if ( ! defined( 'ABSPATH' ) ) {
-	define( 'ABSPATH', __DIR__ . '/' );
+        define( 'ABSPATH', __DIR__ . '/' );
 }
 
 /** Sets up WordPress vars and included files. */
